@@ -28,5 +28,11 @@ def find(root, key):
 def find_max(root):
   if not root.right:
     return root
-  else:
-    return find_max(root.right)
+
+  return find_max(root.right)
+
+def find_min(root):
+  if not root.left:
+    return root
+  
+  return find_min(root.left)

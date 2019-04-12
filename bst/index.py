@@ -1,6 +1,6 @@
 import uuid
 from bst.node import Node
-from bst.utils import insert, find, find_max
+from bst.utils import * 
 
 class BST:
   root = None
@@ -49,3 +49,9 @@ class BST:
     res = find(self.root, key)
     if res:
       return res.id
+  
+  def max(self):
+    return find_max(self.root)
+  
+  def min(self):
+    return find_min(self.root)
