@@ -14,6 +14,6 @@ bst.add(9)
 
 bst.remove(6)
 
-a = bst.find(2)
-b = bst.find(6)
+new_bst = bst.subtree(5)
+
 print("hello")

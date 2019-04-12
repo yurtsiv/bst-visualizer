@@ -36,3 +36,12 @@ def find_min(root):
     return root
   
   return find_min(root.left)
+
+def get_size(root):
+  if not root:
+    return 0
+
+  if not root.left and not root.right:
+    return 1
+  
+  return get_size(root.left) + get_size(root.right)
