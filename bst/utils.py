@@ -14,6 +14,9 @@ def insert(root, node):
       insert(root.left, node)
 
 def find(root, key):
+  if not root:
+    return None
+
   if key > root.key:
     return find(root.right, key)
 

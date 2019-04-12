@@ -1,3 +1,4 @@
+import uuid
 from bst.node import Node
 from bst.utils import insert, find, find_max
 
@@ -6,7 +7,7 @@ class BST:
   size = 0 
 
   def add(self, key):
-    node = Node(self.size, key)
+    node = Node(uuid.uuid4(), key)
     if not self.root:
       self.root = node 
     else:
@@ -43,3 +44,8 @@ class BST:
     left_max.right = node_to_remove.right
     left_max.left = node_to_remove.left
     node_to_remove.substitute_with(left_max)
+
+  def find(self, key):
+    res = find(self.root, key)
+    if res:
+      return res.id
