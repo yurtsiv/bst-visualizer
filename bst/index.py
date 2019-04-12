@@ -66,6 +66,5 @@ class BST:
     return find_min(self.root)
   
   def subtree(self, key):
-    root = find(self.root, key)
-    if root:
-      return BST(root)
+    return BST(find(self.root, key))
+
