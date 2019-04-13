@@ -1,7 +1,10 @@
 from tkinter import *
-from gui import Sidebar
+from gui.sidebar import Sidebar
+from gui.bst_canvas import BSTCanvas
+from bst import BST
 
 class App:
+  bst = BST()
   def set_sizes(self, node, width, height):
     node.geometry("{0}x{1}".format(width, height))
 
@@ -18,7 +21,8 @@ class App:
 
     canvas_cont = Frame(master)
     canvas_cont.grid(column=1)
-    self.sidebar2 = Sidebar(master, canvas_cont)
+    self.bst_canvas = BSTCanvas(master, canvas_cont)
 
   def on_add_new_node(self, key):
-    print(key)
+    self.bst.add(key)
+    self.bst_canvas.draw(self.bst)
