@@ -1,19 +1,6 @@
-from bst import BST
+import tkinter as tk
+from gui import App
 
-bst = BST()
-
-bst.add(3)
-bst.add(2)
-bst.add(1)
-bst.add(6)
-bst.add(4)
-bst.add(5)
-bst.add(7)
-bst.add(8)
-bst.add(9)
-
-bst.remove(6)
-
-new_bst = bst.subtree(5)
-
-print("hello")
+root = tk.Tk()
+App(root)
+root.mainloop()
