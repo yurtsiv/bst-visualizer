@@ -32,8 +32,12 @@ class App:
 
     # Toolbar
     toolbar_cont = Frame(bottom_section)
-    self.toolbar = Toolbar(master, toolbar_cont)
-    self.toolbar.on_add_new_node(self.on_add_new_node)
+    self.toolbar = Toolbar(
+      master,
+      toolbar_cont,
+      on_add_new_node=self.on_add_new_node,
+      on_remove_node=self.on_remove_node
+    )
     toolbar_cont.grid(row=0, column=0, sticky="WENS")
 
     # Text output
@@ -45,4 +49,8 @@ class App:
 
   def on_add_new_node(self, key):
     self.bst.add(key)
+    self.bst_canvas.draw(self.bst)
+
+  def on_remove_node(self, key):
+    self.bst.remove(key)
     self.bst_canvas.draw(self.bst)

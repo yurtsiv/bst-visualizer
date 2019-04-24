@@ -30,12 +30,16 @@ class BST:
 
     # remove root
     if node_to_remove.id == self.root.id:
-      left_max = find_max(self.root.left)
-      left_max.substitute_with_child('left')
-      left_max.right = self.root.right
-      left_max.left = self.root.left
+      if self.root.left:
+        left_max = find_max(self.root.left)
+        left_max.substitute_with_child('left')
+        left_max.right = self.root.right
+        left_max.left = self.root.left
 
-      self.root = left_max
+        self.root = left_max
+      else:
+        self.root = self.root.right
+
       return
 
     # remove node with only left child or no childs

@@ -54,6 +54,9 @@ def get_size(root):
   return get_size(root.left) + get_size(root.right)
 
 def draw(root, rel_side, parent_pos, curr_depth, static_params):
+  if not root:
+    return
+
   canvas, tree_size = static_params['canvas'], static_params['tree_size']
 
   horizontal_offset = (tree_size * 50) / math.pow(curr_depth, 2)
