@@ -20,7 +20,7 @@ class BST:
       inserted = insert(self.root, node)
       if inserted:
         self.size += 1
-
+    
   def remove(self, key):
     node_to_remove = find(self.root, key)
     if not node_to_remove:
@@ -69,5 +69,11 @@ class BST:
   def subtree(self, key):
     return BST(find(self.root, key))
 
-  def draw(self, canvas):
-    draw(self.root, canvas, { 'x': 400, 'y': 10}, None, 1, self.size)
+  def draw(self, canvas, init_pos):
+    draw(
+      self.root,
+      None,
+      init_pos,
+      1,
+      { 'canvas': canvas, 'tree_size': self.size }
+    )

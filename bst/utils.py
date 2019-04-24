@@ -1,3 +1,5 @@
+import math
+
 def insert(root, node):
   if root.key == node.key:
     return False
@@ -8,7 +10,7 @@ def insert(root, node):
       root.right = node
       return True
     
-    insert(root.right, node)
+    return insert(root.right, node)
 
   elif node.key < root.key:
     if root.left == None:
@@ -16,7 +18,7 @@ def insert(root, node):
       root.left = node
       return True
 
-    insert(root.left, node)
+    return insert(root.left, node)
 
 def find(root, key):
   if not root:
@@ -51,23 +53,35 @@ def get_size(root):
   
   return get_size(root.left) + get_size(root.right)
 
-def draw(root, canvas, parent_pos, side, level, size):
-  position = { 'y': parent_pos['y'] + 20, 'x': None }
-  if not side:
-    position = parent_pos
-  elif side == 'left':
-    position['x'] = parent_pos['x'] - (size * 10) / level 
+def draw(root, rel_side, parent_pos, curr_depth, static_params):
+  canvas, tree_size = static_params['canvas'], static_params['tree_size']
+
+  horizontal_offset = (tree_size * 50) / math.pow(curr_depth, 2)
+  vertical_offset = 50
+
+  new_pos = { 'y': parent_pos['y'] + vertical_offset, 'x': None }
+
+  if curr_depth == 1:
+    new_pos = parent_pos
+  elif rel_side == 'left':
+    new_pos['x'] = parent_pos['x'] - horizontal_offset 
   else:
-    position['x'] = parent_pos['x'] + (size * 10) / level
+    new_pos['x'] = parent_pos['x'] + horizontal_offset
   
-  canvas.create_text(position['x'], position['y'], text=root.key)
-  canvas.create_line(parent_pos['x'], parent_pos['y'], position['x'], position['y'])
+  canvas.create_text(new_pos['x'], new_pos['y'], text=root.key, font=24)
+  if curr_depth != 1:
+    canvas.create_line(
+      parent_pos['x'],
+      parent_pos['y'] + 10,
+      new_pos['x'],
+      new_pos['y'] - 10
+    )
 
   if not root.left and not root.right:
     return
 
   if root.left:
-    draw(root.left, canvas, position, 'left', level+1, size)
+    draw(root.left, 'left', new_pos, curr_depth+1, static_params)
   
   if root.right:
-    draw(root.right, canvas, position, 'right', level+1, size)
+    draw(root.right, 'right', new_pos, curr_depth+1, static_params)
