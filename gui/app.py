@@ -36,7 +36,8 @@ class App:
       master,
       toolbar_cont,
       on_add_new_node=self.on_add_new_node,
-      on_remove_node=self.on_remove_node
+      on_remove_node=self.on_remove_node,
+      on_show_subtree=self.on_show_subtree
     )
     toolbar_cont.grid(row=0, column=0, sticky="WENS")
 
@@ -46,6 +47,9 @@ class App:
     master.update()
     self.text_output = TextOutput(text_output_cont)
 
+  def on_show_subtree(self, root_key):
+    self.bst = self.bst.subtree(root_key)
+    self.bst_canvas.draw(self.bst)
 
   def on_add_new_node(self, key):
     self.bst.add(key)

@@ -6,7 +6,8 @@ class Toolbar:
     master,
     root,
     on_add_new_node,
-    on_remove_node
+    on_remove_node,
+    on_show_subtree,
   ):
     vcmd = master.register(self.validate_num)
 
@@ -31,6 +32,17 @@ class Toolbar:
       command=self.on_entry_submit(remove_node_entry, on_remove_node)
     )
     remove_node_btn.grid(row=5)
+
+    # Subtree 
+    Label(root, text="Subtree").grid(row=6)
+    show_subtree_entry = Entry(root, validate='all', validatecommand=(vcmd, '%P'))
+    show_subtree_entry.grid(row=7)
+    show_subtree_btn = Button(
+      root,
+      text="Show",
+      command=self.on_entry_submit(show_subtree_entry, on_show_subtree)
+    )
+    show_subtree_btn.grid(row=8)
 
   def validate_num(self, P):
     if str.isdigit(P) or P == "":
