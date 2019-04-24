@@ -37,7 +37,8 @@ class App:
       toolbar_cont,
       on_add_new_node=self.on_add_new_node,
       on_remove_node=self.on_remove_node,
-      on_show_subtree=self.on_show_subtree
+      on_show_subtree=self.on_show_subtree,
+      on_get_id=self.on_get_id
     )
     toolbar_cont.grid(row=0, column=0, sticky="WENS")
 
@@ -58,3 +59,8 @@ class App:
   def on_remove_node(self, key):
     self.bst.remove(key)
     self.bst_canvas.draw(self.bst)
+
+  def on_get_id(self, key):
+    id = self.bst.find(key)
+    if id:
+      self.text_output.println('ID of ' + str(key) + ': ' + str(id))

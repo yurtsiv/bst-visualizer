@@ -14,3 +14,6 @@ class TextOutput:
   
     self.text_cont.config(yscrollcommand=scrollbar.set)
     scrollbar.config(command=self.text_cont.yview)
+  
+  def println(self, text):
+    self.text_cont.insert(END, text + '\n')
