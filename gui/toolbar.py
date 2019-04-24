@@ -1,6 +1,6 @@
 from tkinter import *
 
-class Sidebar:
+class Toolbar:
   def __init__(self, master, root):
     Label(root, text="Add new node").grid(row=0)
 
