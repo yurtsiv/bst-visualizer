@@ -9,6 +9,12 @@ class Toolbar:
     on_remove_node,
     on_show_subtree,
     on_get_id,
+    on_size_click,
+    on_root_click,
+    on_min_click,
+    on_max_click,
+    on_print_click,
+    on_clear_click
   ):
     vcmd = master.register(self.validate_num)
 
@@ -55,6 +61,30 @@ class Toolbar:
       command=self.on_entry_submit(get_id_entry, on_get_id)
     )
     get_id_btn.grid(row=5, column=1)
+
+    # Size
+    size_btn = Button(root, text="Size", command=on_size_click)
+    size_btn.grid(row=1, column=2) 
+
+    # Root
+    root_btn = Button(root, text="Root", command=on_root_click)
+    root_btn.grid(row=2, column=2) 
+
+    # Min
+    min_btn = Button(root, text="Min", command=on_min_click)
+    min_btn.grid(row=3, column=2) 
+
+    # Max
+    max_btn = Button(root, text="Max", command=on_max_click)
+    max_btn.grid(row=1, column=3) 
+
+    # Print
+    print_btn = Button(root, text="Print", command=on_print_click)
+    print_btn.grid(row=2, column=3) 
+
+    # Clear
+    clear_btn = Button(root, text="Clear", command=on_clear_click)
+    clear_btn.grid(row=3, column=3) 
 
   def validate_num(self, P):
     if str.isdigit(P) or P == "":

@@ -38,8 +38,15 @@ class App:
       on_add_new_node=self.on_add_new_node,
       on_remove_node=self.on_remove_node,
       on_show_subtree=self.on_show_subtree,
-      on_get_id=self.on_get_id
+      on_get_id=self.on_get_id,
+      on_size_click=self.on_size_click,
+      on_root_click=self.on_root_click,
+      on_min_click=self.on_min_click,
+      on_max_click=self.on_max_click,
+      on_print_click=self.on_print_click,
+      on_clear_click=self.on_clear_click
     )
+
     toolbar_cont.grid(row=0, column=0, sticky="WENS")
 
     # Text output
@@ -47,6 +54,35 @@ class App:
     text_output_cont.grid(row=0, column=1, sticky="WENS")
     master.update()
     self.text_output = TextOutput(text_output_cont)
+
+  def on_size_click(self):
+    self.text_output.println(
+      "Tree size: " + str(self.bst.size)
+    )
+  
+  def on_root_click(self):
+    self.text_output.println(
+      "Root element: " + str(self.bst.root_key())
+    )
+
+  def on_min_click(self):
+    self.text_output.println(
+      "Min element: " + str(self.bst.min())
+    )
+
+  def on_max_click(self):
+    self.text_output.println(
+      "Max element: " + str(self.bst.max())
+    )
+  
+  def on_print_click(self):
+    self.text_output.println(
+      "String representation"
+    )
+
+  def on_clear_click(self):
+    self.bst = BST()
+    self.bst_canvas.draw(self.bst)
 
   def on_show_subtree(self, root_key):
     self.bst = self.bst.subtree(root_key)

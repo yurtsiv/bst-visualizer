@@ -10,6 +10,12 @@ class BST:
     self.root = root
     self.size = get_size(root)
 
+  def root_key(self):
+    if self.root:
+      return self.root.key
+    
+    return None
+
   def add(self, key):
     node = Node(uuid.uuid4(), key)
 
@@ -65,10 +71,16 @@ class BST:
       return res.id
   
   def max(self):
-    return find_max(self.root)
+    if not self.root:
+      return
+
+    find_max(self.root).key
   
   def min(self):
-    return find_min(self.root)
+    if not self.root:
+      return
+
+    return find_min(self.root).key
   
   def subtree(self, key):
     return BST(find(self.root, key))
