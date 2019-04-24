@@ -44,7 +44,7 @@ class App:
       on_min_click=self.on_min_click,
       on_max_click=self.on_max_click,
       on_print_click=self.on_print_click,
-      on_clear_click=self.on_clear_click
+      on_reset_click=self.on_reset_click
     )
 
     toolbar_cont.grid(row=0, column=0, sticky="WENS")
@@ -76,13 +76,17 @@ class App:
     )
   
   def on_print_click(self):
+    str_repres= self.bst.to_string()
     self.text_output.println(
-      "String representation"
+      'In-order: ' + str_repres['in_order'] + '\n' +
+      'Pre-order: ' + str_repres['pre_order'] + '\n' +
+      'Post-order: ' + str_repres['post_order']
     )
 
-  def on_clear_click(self):
+  def on_reset_click(self):
     self.bst = BST()
     self.bst_canvas.draw(self.bst)
+    self.text_output.clear()
 
   def on_show_subtree(self, root_key):
     self.bst = self.bst.subtree(root_key)

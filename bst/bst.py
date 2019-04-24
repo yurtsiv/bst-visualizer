@@ -93,3 +93,10 @@ class BST:
       1,
       { 'canvas': canvas, 'tree_size': self.size }
     )
+  
+  def to_string(self):
+    return {
+      'in_order': traverse_in_order(self.root),
+      'pre_order': traverse_pre_order(self.root),
+      'post_order': traverse_post_order(self.root)
+    }

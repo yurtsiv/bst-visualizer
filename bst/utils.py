@@ -88,3 +88,32 @@ def draw(root, rel_side, parent_pos, curr_depth, static_params):
   
   if root.right:
     draw(root.right, 'right', new_pos, curr_depth+1, static_params)
+
+def traverse_in_order(root):
+  if not root:
+    return ''
+  
+  if not root.left and not root.right:
+    return str(root.key) + ' '
+  
+  return traverse_in_order(root.left) + str(root.key) + ' ' + traverse_in_order(root.right)
+
+def traverse_pre_order(root):
+  if not root:
+    return ''
+  
+  if not root.left and not root.right:
+    return str(root.key) + ' '
+  
+  return str(root.key) + ' ' + traverse_pre_order(root.left) + traverse_pre_order(root.right)
+
+def traverse_post_order(root):
+  if not root:
+    return ''
+  
+  if not root.left and not root.right:
+    return str(root.key) + ' '
+  
+  return traverse_post_order(root.left) + traverse_post_order(root.right) + str(root.key) + ' '
+
+

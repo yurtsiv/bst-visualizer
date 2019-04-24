@@ -20,3 +20,8 @@ class TextOutput:
     self.text_cont.config(state=NORMAL)
     self.text_cont.insert(END, text + '\n')
     self.text_cont.config(state=DISABLED)
+  
+  def clear(self):
+    self.text_cont.config(state=NORMAL)
+    self.text_cont.delete(1.0, END)
+    self.text_cont.config(state=DISABLED)

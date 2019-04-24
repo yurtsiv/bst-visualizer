@@ -14,7 +14,7 @@ class Toolbar:
     on_min_click,
     on_max_click,
     on_print_click,
-    on_clear_click
+    on_reset_click
   ):
     vcmd = master.register(self.validate_num)
     self.vcmd = vcmd
@@ -48,9 +48,9 @@ class Toolbar:
 
     self.make_entry_field(
       root,
-      label='Node ID',
+      label='Get node ID',
       btn_label='Get',
-      submit_handler=on_show_subtree,
+      submit_handler=on_get_id,
       row=3,
       column=1
     )
@@ -75,9 +75,9 @@ class Toolbar:
     print_btn = Button(root, text="Print", command=on_print_click)
     print_btn.grid(row=2, column=3, sticky="WENS") 
 
-    # Clear
-    clear_btn = Button(root, text="Clear", command=on_clear_click)
-    clear_btn.grid(row=3, column=3, sticky="WENS") 
+    # Reset
+    reset_btn = Button(root, text="Reset", command=on_reset_click)
+    reset_btn.grid(row=3, column=3, sticky="WENS") 
 
   def make_entry_field(
     self,
@@ -98,7 +98,6 @@ class Toolbar:
       command=self.on_entry_submit(entry, submit_handler),
     )
     btn.grid(row=row+2, column=column, sticky="W")
-
 
   def validate_num(self, P):
     if str.isdigit(P) or P == '':
