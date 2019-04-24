@@ -51,7 +51,7 @@ def get_size(root):
   if not root.left and not root.right:
     return 1
   
-  return get_size(root.left) + get_size(root.right)
+  return get_size(root.left) + get_size(root.right) + 1
 
 def draw(root, rel_side, parent_pos, curr_depth, static_params):
   if not root:

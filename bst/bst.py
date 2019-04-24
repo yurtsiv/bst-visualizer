@@ -74,7 +74,7 @@ class BST:
     if not self.root:
       return
 
-    find_max(self.root).key
+    return find_max(self.root).key
   
   def min(self):
     if not self.root:
