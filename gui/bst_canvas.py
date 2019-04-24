@@ -2,9 +2,7 @@ from tkinter import *
 
 class BSTCanvas:
   def __init__(self, master, root):
-    self.canvas = Canvas(
-      root,
-    )
+    self.canvas = Canvas(root)
     self.canvas.pack()
 
   def draw(self, bst):
