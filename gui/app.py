@@ -25,9 +25,9 @@ class App:
     master.grid_rowconfigure(0)
 
     # Toolbar & text ouput
-    bottom_section = Frame(master)
-    bottom_section.grid_columnconfigure(0, minsize=win_width // 2)
-    bottom_section.grid_columnconfigure(1, minsize=win_width // 2)
+    bottom_section = Frame(master, bd=5, relief=RIDGE)
+    bottom_section.grid_columnconfigure(0, minsize=win_width * 0.25)
+    bottom_section.grid_columnconfigure(1, minsize=win_width * 0.75 - 10)
     bottom_section.grid(row=1)
 
     # Toolbar

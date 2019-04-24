@@ -17,77 +17,91 @@ class Toolbar:
     on_clear_click
   ):
     vcmd = master.register(self.validate_num)
+    self.vcmd = vcmd
 
-    # New node
-    Label(root, text="Add node").grid(row=0, column=0)
-    new_node_entry = Entry(root, validate='all', validatecommand=(vcmd, '%P'))
-    new_node_entry.grid(row=1, column=0)
-    new_node_btn = Button(
+    self.make_entry_field(
       root,
-      text="Add",
-      command=self.on_entry_submit(new_node_entry, on_add_new_node) 
+      label='Add node',
+      btn_label='Add',
+      submit_handler=on_add_new_node,
+      row=0,
+      column=0
     )
-    new_node_btn.grid(row=2, column=0)
 
-    # Remove node 
-    Label(root, text="Remove node").grid(row=3, column=0)
-    remove_node_entry = Entry(root, validate='all', validatecommand=(vcmd, '%P'))
-    remove_node_entry.grid(row=4, column=0)
-    remove_node_btn = Button(
+    self.make_entry_field(
       root,
-      text="Remove",
-      command=self.on_entry_submit(remove_node_entry, on_remove_node)
+      label='Remove node',
+      btn_label='Remove',
+      submit_handler=on_remove_node,
+      row=3,
+      column=0
     )
-    remove_node_btn.grid(row=5, column=0)
 
-    # Subtree 
-    Label(root, text="Subtree").grid(row=0, column=1)
-    show_subtree_entry = Entry(root, validate='all', validatecommand=(vcmd, '%P'))
-    show_subtree_entry.grid(row=1, column=1)
-    show_subtree_btn = Button(
+    self.make_entry_field(
       root,
-      text="Show",
-      command=self.on_entry_submit(show_subtree_entry, on_show_subtree)
+      label='Subtree',
+      btn_label='Show',
+      submit_handler=on_show_subtree,
+      row=0,
+      column=1
     )
-    show_subtree_btn.grid(row=2, column=1)
 
-    # Get ID 
-    Label(root, text="Get ID").grid(row=3, column=1)
-    get_id_entry = Entry(root, validate='all', validatecommand=(vcmd, '%P'))
-    get_id_entry.grid(row=4, column=1)
-    get_id_btn = Button(
+    self.make_entry_field(
       root,
-      text="Get",
-      command=self.on_entry_submit(get_id_entry, on_get_id)
+      label='Node ID',
+      btn_label='Get',
+      submit_handler=on_show_subtree,
+      row=3,
+      column=1
     )
-    get_id_btn.grid(row=5, column=1)
 
     # Size
     size_btn = Button(root, text="Size", command=on_size_click)
-    size_btn.grid(row=1, column=2) 
+    size_btn.grid(row=1, column=2, sticky="WENS") 
 
     # Root
     root_btn = Button(root, text="Root", command=on_root_click)
-    root_btn.grid(row=2, column=2) 
+    root_btn.grid(row=2, column=2, sticky="WENS") 
 
     # Min
     min_btn = Button(root, text="Min", command=on_min_click)
-    min_btn.grid(row=3, column=2) 
+    min_btn.grid(row=3, column=2, sticky="WENS") 
 
     # Max
     max_btn = Button(root, text="Max", command=on_max_click)
-    max_btn.grid(row=1, column=3) 
+    max_btn.grid(row=1, column=3, sticky="WENS") 
 
     # Print
     print_btn = Button(root, text="Print", command=on_print_click)
-    print_btn.grid(row=2, column=3) 
+    print_btn.grid(row=2, column=3, sticky="WENS") 
 
     # Clear
     clear_btn = Button(root, text="Clear", command=on_clear_click)
-    clear_btn.grid(row=3, column=3) 
+    clear_btn.grid(row=3, column=3, sticky="WENS") 
+
+  def make_entry_field(
+    self,
+    root,
+    label,
+    btn_label,
+    submit_handler,
+    row,
+    column,
+  ):
+    root.grid_columnconfigure(column, pad=20)
+    Label(root, text=label).grid(row=row, column=column, sticky="W")
+    entry = Entry(root, validate='all', validatecommand=(self.vcmd, '%P'))
+    entry.grid(row=row+1, column=column, sticky="W")
+    btn = Button(
+      root,
+      text=btn_label,
+      command=self.on_entry_submit(entry, submit_handler),
+    )
+    btn.grid(row=row+2, column=column, sticky="W")
+
 
   def validate_num(self, P):
-    if str.isdigit(P) or P == "":
+    if str.isdigit(P) or P == '':
         return True
     else:
         return False
