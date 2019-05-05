@@ -8,27 +8,26 @@ class App:
   bst = BST()
 
   def __init__(self, master):
+    # open full screen
     master.wm_attributes('-zoomed', True)
     master.update()
 
-    win_width = master.winfo_width()
-    win_height = master.winfo_height()
+    self.init_ui_elems(master)
 
-    master.grid_rowconfigure(0, minsize=win_height*0.75)
-    master.grid_rowconfigure(1, minsize=win_height*0.25)
-    master.grid_columnconfigure(0, minsize=win_width)
+  def init_ui_elems(self, master):
+    master.grid_rowconfigure(0, weight=1)
+    master.grid_columnconfigure(0, weight=1)
 
     # Canvas
     canvas_cont = Frame(master)
     self.bst_canvas = BSTCanvas(master, canvas_cont)
     canvas_cont.grid(row=0, sticky="WENS")
-    master.grid_rowconfigure(0)
 
     # Toolbar & text ouput
     bottom_section = Frame(master, bd=5, relief=RIDGE)
-    bottom_section.grid_columnconfigure(0, minsize=win_width * 0.25)
-    bottom_section.grid_columnconfigure(1, minsize=win_width * 0.75 - 10)
-    bottom_section.grid(row=1)
+    bottom_section.grid_columnconfigure(1, weight=3)
+    bottom_section.grid_rowconfigure(0, weight=1)
+    bottom_section.grid(row=1, sticky="WENS")
 
     # Toolbar
     toolbar_cont = Frame(bottom_section)
@@ -51,8 +50,9 @@ class App:
 
     # Text output
     text_output_cont = Frame(bottom_section)
+    text_output_cont.grid_columnconfigure(0, weight=1)
+    text_output_cont.grid_rowconfigure(1, weight=1)
     text_output_cont.grid(row=0, column=1, sticky="WENS")
-    master.update()
     self.text_output = TextOutput(text_output_cont)
 
   def on_size_click(self):

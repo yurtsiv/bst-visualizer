@@ -18,6 +18,9 @@ class Toolbar:
   ):
     vcmd = master.register(self.validate_num)
     self.vcmd = vcmd
+    
+    for i in range(0, 6):
+      root.grid_rowconfigure(i, minsize=30)
 
     self.make_entry_field(
       root,
@@ -88,16 +91,15 @@ class Toolbar:
     row,
     column,
   ):
-    root.grid_columnconfigure(column, pad=20)
     Label(root, text=label).grid(row=row, column=column, sticky="W")
-    entry = Entry(root, validate='all', validatecommand=(self.vcmd, '%P'))
-    entry.grid(row=row+1, column=column, sticky="W")
+    entry = Entry(root, validate='all', validatecommand=(self.vcmd, '%P'), width=11)
+    entry.grid(row=row+1, column=column, sticky="WENS")
     btn = Button(
       root,
       text=btn_label,
       command=self.on_entry_submit(entry, submit_handler),
     )
-    btn.grid(row=row+2, column=column, sticky="W")
+    btn.grid(row=row+2, column=column, sticky="WE")
 
   def validate_num(self, P):
     if str.isdigit(P) or P == '':
