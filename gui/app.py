@@ -96,8 +96,6 @@ class App:
     else:
       self.text_output.println('WARNING: There is no ' + str(root_key) + ' in the tree')
 
-    
-
   def on_add_new_node(self, key):
     inserted = self.bst.add(key)
     if inserted:
