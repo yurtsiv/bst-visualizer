@@ -22,15 +22,18 @@ class BST:
     if not self.root:
       self.root = node 
       self.size += 1
-    else:
-      inserted = insert(self.root, node)
-      if inserted:
-        self.size += 1
+      return True
+    
+    inserted = insert(self.root, node)
+    if inserted:
+      self.size += 1
+    
+    return inserted
     
   def remove(self, key):
     node_to_remove = find(self.root, key)
     if not node_to_remove:
-      return
+      return False
 
     self.size -= 1
 
@@ -46,17 +49,17 @@ class BST:
       else:
         self.root = self.root.right
 
-      return
+      return True
 
     # remove node with only left child or no childs
     if not node_to_remove.right:
       node_to_remove.substitute_with_child('left')
-      return
+      return True
     
     # remove node with only right child or no childs
     if not node_to_remove.left:
       node_to_remove.substitute_with_child('right')
-      return
+      return True
 
     # remove node with both childs 
     left_max = find_max(node_to_remove.left)
@@ -64,6 +67,7 @@ class BST:
     left_max.right = node_to_remove.right
     left_max.left = node_to_remove.left
     node_to_remove.substitute_with(left_max)
+    return True
 
   def find(self, key):
     res = find(self.root, key)
@@ -83,7 +87,12 @@ class BST:
     return find_min(self.root).key
   
   def subtree(self, key):
-    return BST(find(self.root, key))
+    root = find(self.root, key)
+    if root:
+      return BST(root)
+    
+    return None
+
 
   def draw(self, canvas, init_pos):
     draw(

@@ -89,18 +89,32 @@ class App:
     self.text_output.clear()
 
   def on_show_subtree(self, root_key):
-    self.bst = self.bst.subtree(root_key)
-    self.bst_canvas.draw(self.bst)
+    new_bst = self.bst.subtree(root_key)
+    if new_bst:
+      self.bst = new_bst
+      self.bst_canvas.draw(self.bst)
+    else:
+      self.text_output.println('WARNING: There is no ' + str(root_key) + ' in the tree')
+
+    
 
   def on_add_new_node(self, key):
-    self.bst.add(key)
-    self.bst_canvas.draw(self.bst)
+    inserted = self.bst.add(key)
+    if inserted:
+      self.bst_canvas.draw(self.bst)
+    else:
+      self.text_output.println('WARNING: Node ' + str(key) + ' was not added since it already exists')
 
   def on_remove_node(self, key):
-    self.bst.remove(key)
-    self.bst_canvas.draw(self.bst)
+    removed = self.bst.remove(key)
+    if removed:
+      self.bst_canvas.draw(self.bst)
+    else:
+      self.text_output.println('WARNING: There is no ' + str(key) + ' in the tree')
 
   def on_get_id(self, key):
     id = self.bst.find(key)
     if id:
       self.text_output.println('ID of ' + str(key) + ': ' + str(id))
+    else:
+      self.text_output.println('WARNING: There is no ' + str(key) + ' in the tree')
