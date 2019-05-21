@@ -1,6 +1,6 @@
 # BST visualizer
 
-A small programm with ugly UI for [binary search tree](https://en.wikipedia.org/wiki/Binary_search_tree) vizualization.
+A small programm with ugly UI for [binary search tree](https://en.wikipedia.org/wiki/Binary_search_tree) visualization.
 
 ## Installation & running
 -  `git clone https://github.com/yurtsiv/bst-visualizer.git`
